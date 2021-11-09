@@ -3,7 +3,7 @@ package com.asc.squash.domaine;
 import java.util.Date;
 import java.util.Set;
 
-public class Utilisateur extends Joueur {
+public class User extends Joueur {
 
     private String idUser;
     private String password;
@@ -11,10 +11,10 @@ public class Utilisateur extends Joueur {
     private Date LastDateConnexion;
     private Set<RoleTypeEnum> role;
 
-    public Utilisateur() {
+    public User() {
     }
 
-    public Utilisateur(String nomJoueur, String prenomJoueur, String mailJoueur, String numeroTelJoueur, String idUser, String password, boolean isAutorized, Date lastDateConnexion, Set<RoleTypeEnum> role) {
+    public User(String nomJoueur, String prenomJoueur, String mailJoueur, String numeroTelJoueur, String idUser, String password, boolean isAutorized, Date lastDateConnexion, Set<RoleTypeEnum> role) {
         super(nomJoueur, prenomJoueur, mailJoueur, numeroTelJoueur);
         this.idUser = idUser;
         this.password = password;

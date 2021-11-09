@@ -1,8 +1,8 @@
 package com.asc.squash.exposition.api;
 
-import com.asc.squash.application.service.IJoueurManagment;
+import com.asc.squash.application.service.IUserManagment;
 import com.asc.squash.exposition.dto.JoueurDto;
-import com.asc.squash.infrastructure.Joueur.JoueurEntity;
+import com.asc.squash.exposition.dto.UserDtoCreate;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -17,24 +17,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/joueur")
+@RequestMapping("v1/user")
 @Api(value = "permet la création/mise à jour/suppression dans la base")
-public class JoueurController {
+public class UserController {
 
-    private static Logger logger = LoggerFactory.getLogger(JoueurController.class);
+    private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
-    private IJoueurManagment joueurManagment;
+    private IUserManagment userManagment;
 
     @PostMapping("/create")
-    @ApiOperation(value = "crée un joueur")
+    @ApiOperation(value = "crée un utilsateur")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Créatione effectuée"),
             @ApiResponse(code = 400,message = "données en entrée incorrectes"),
-            @ApiResponse(code = 409, message = "joueur existant")
+            @ApiResponse(code = 409, message = "utilisateur existant")
     })
-    public ResponseEntity<String> createJoueur(@RequestBody JoueurDto joueurDto) {
-        return new ResponseEntity<String>(joueurManagment.createJoueur(joueurDto), HttpStatus.CREATED);
+    public ResponseEntity<String> createUser(@RequestBody UserDtoCreate userDto) {
+        return new ResponseEntity<String>(userManagment.createJoueur(userDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/list")
@@ -66,4 +66,5 @@ public class JoueurController {
     public ResponseEntity<String> deleteJoueur(@PathVariable("mail") String mail){
         return new ResponseEntity<String>(joueurManagment.deleteJoueur(mail), HttpStatus.OK);
     }
+
 }

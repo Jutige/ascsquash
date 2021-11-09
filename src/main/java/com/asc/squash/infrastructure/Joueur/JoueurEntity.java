@@ -19,11 +19,38 @@ public class JoueurEntity {
     public JoueurEntity() {
     }
 
-    public JoueurEntity(Long idJoueur, String nomJoueur, String prenomJoueur, String mailJoueur, String numeroTelJoueur) {
-        this.idJoueur = idJoueur;
+    public JoueurEntity(String nomJoueur, String prenomJoueur, String mailJoueur, String numeroTelJoueur) {
         this.nomJoueur = nomJoueur;
         this.prenomJoueur = prenomJoueur;
         this.mailJoueur = mailJoueur;
+        this.numeroTelJoueur = numeroTelJoueur;
+    }
+
+    public String getNomJoueur() {
+        return nomJoueur;
+    }
+
+    public String getPrenomJoueur() {
+        return prenomJoueur;
+    }
+
+    public String getMailJoueur() {
+        return mailJoueur;
+    }
+
+    public String getNumeroTelJoueur() {
+        return numeroTelJoueur;
+    }
+
+    public void setNomJoueur(String nomJoueur) {
+        this.nomJoueur = nomJoueur;
+    }
+
+    public void setPrenomJoueur(String prenomJoueur) {
+        this.prenomJoueur = prenomJoueur;
+    }
+
+    public void setNumeroTelJoueur(String numeroTelJoueur) {
         this.numeroTelJoueur = numeroTelJoueur;
     }
 }
