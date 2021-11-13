@@ -11,4 +11,7 @@ public interface IJoueurDomaine {
     Joueur UpdateJoueur(Joueur joueur);
 
     boolean deleteJoueur(String email);
+
+
+    Joueur findJoueurById(String idUSer);
 }

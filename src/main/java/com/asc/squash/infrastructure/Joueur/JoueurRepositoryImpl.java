@@ -68,4 +68,9 @@ public class JoueurRepositoryImpl implements IJoueurDomaine {
             return false;
         }
     }
+
+    @Override
+    public Joueur findJoueurById (String idUSer) {
+        return joueurEntityMapper.mapToDomain(joueurRepository.findByMailJoueur(idUSer));
+    }
 }

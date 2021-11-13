@@ -20,7 +20,7 @@ public class UserEntityMapper extends AbstractMapper<User,UserEntity> {
                 entity.getJoueurEntity().getPrenomJoueur(),
                 entity.getJoueurEntity().getMailJoueur(),
                 entity.getJoueurEntity().getNumeroTelJoueur(),
-                entity.getIdUtilisateur(),
+                entity.getIdMail(),
                 entity.getPassword(),
                 entity.isAutorized(),
                 entity.getLastDateConnexion(),
@@ -34,7 +34,6 @@ public class UserEntityMapper extends AbstractMapper<User,UserEntity> {
         return new UserEntity(dto.getIdUser(),
                 dto.getPassword(),
                 dto.isAutorized(),
-                dto.getLastDateConnexion(),
                 dto.getRole(),
                 joueurEntity);
     }

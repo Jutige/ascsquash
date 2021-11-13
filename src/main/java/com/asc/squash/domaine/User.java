@@ -23,6 +23,13 @@ public class User extends Joueur {
         this.role = role;
     }
 
+    public User(String idUser, String password, boolean isAutorized, Set<RoleTypeEnum> role) {
+        this.idUser = idUser;
+        this.password = password;
+        this.isAutorized = isAutorized;
+        this.role = role;
+    }
+
     public String getIdUser() {
         return idUser;
     }

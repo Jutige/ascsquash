@@ -17,7 +17,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUser;
 
-    private String idUtilisateur;
+    private String idMail;
     private String password;
     private boolean isAutorized;
     @Temporal(TemporalType.TIMESTAMP)
@@ -34,11 +34,10 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(String idUtilisateur, String password, boolean isAutorized, Date lastDateConnexion, Set<RoleTypeEnum> roles, JoueurEntity joueurEntity) {
-        this.idUtilisateur = idUtilisateur;
+    public UserEntity(String idMail, String password, boolean isAutorized, Set<RoleTypeEnum> roles, JoueurEntity joueurEntity) {
+        this.idMail = idMail;
         this.password = password;
         this.isAutorized = isAutorized;
-        LastDateConnexion = lastDateConnexion;
         this.roles = roles;
         this.joueurEntity = joueurEntity;
     }
@@ -51,12 +50,12 @@ public class UserEntity {
         this.idUser = idUser;
     }
 
-    public String getIdUtilisateur() {
-        return idUtilisateur;
+    public String getIdMail() {
+        return idMail;
     }
 
     public void setIdUtilisateur(String idUtilisateur) {
-        this.idUtilisateur = idUtilisateur;
+        this.idMail = idUtilisateur;
     }
 
     public String getPassword() {

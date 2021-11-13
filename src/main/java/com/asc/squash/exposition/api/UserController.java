@@ -2,6 +2,7 @@ package com.asc.squash.exposition.api;
 
 import com.asc.squash.application.service.IUserManagment;
 import com.asc.squash.exposition.dto.JoueurDto;
+import com.asc.squash.exposition.dto.UserDto;
 import com.asc.squash.exposition.dto.UserDtoCreate;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,26 +28,26 @@ public class UserController {
     private IUserManagment userManagment;
 
     @PostMapping("/create")
-    @ApiOperation(value = "crée un utilsateur")
+    @ApiOperation(value = "crée un utilisateur")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Créatione effectuée"),
             @ApiResponse(code = 400,message = "données en entrée incorrectes"),
             @ApiResponse(code = 409, message = "utilisateur existant")
     })
     public ResponseEntity<String> createUser(@RequestBody UserDtoCreate userDto) {
-        return new ResponseEntity<String>(userManagment.createJoueur(userDto), HttpStatus.CREATED);
+        return new ResponseEntity<String>(userManagment.createUser(userDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/list")
-    @ApiOperation(value = "récupère la liste des joueurs")
+    @ApiOperation(value = "récupère la liste des utilisateurs")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Liste des joueurs retournée"),
-            @ApiResponse(code = 404, message = "aucun joueur trouvé")
+            @ApiResponse(code = 200, message = "Liste des utilisateurs retournée"),
+            @ApiResponse(code = 404, message = "aucun utilisateur trouvé")
     })
-    public ResponseEntity<List<JoueurDto>> listJoueur(){
-        return new ResponseEntity<List<JoueurDto>>(joueurManagment.listJoueurDto(), HttpStatus.OK);
+    public ResponseEntity<List<UserDto>> listJoueur(){
+        return new ResponseEntity<List<UserDto>>(userManagment.listUserDto(), HttpStatus.OK);
     }
-
+/*
     @PostMapping("/update")
     @ApiOperation(value = "Mise à jour d'un joueur")
     @ApiResponses(value = {
@@ -56,15 +57,15 @@ public class UserController {
     public ResponseEntity<JoueurDto> updateJoueur(@RequestBody JoueurDto joueurDto) {
         return new ResponseEntity<JoueurDto>(joueurManagment.updateJoueur(joueurDto), HttpStatus.OK);
     }
-
-    @ApiOperation(value = "Supprime un joueur")
+*/
+    @ApiOperation(value = "Supprime un utilisateur")
     @ApiResponses(value = {
             @ApiResponse(code = 200,message = "Ok, suppression effectuée"),
-            @ApiResponse(code = 404,message = "joueur non supprimé : joueur absent ou problème lors de la suppression en base")
+            @ApiResponse(code = 404,message = "utilisateur non supprimé : utilisateur absent ou problème lors de la suppression en base")
     })
     @DeleteMapping("/delete/{mail}")
     public ResponseEntity<String> deleteJoueur(@PathVariable("mail") String mail){
-        return new ResponseEntity<String>(joueurManagment.deleteJoueur(mail), HttpStatus.OK);
+        return new ResponseEntity<String>(userManagment.deleteUser(mail), HttpStatus.OK);
     }
 
 }
