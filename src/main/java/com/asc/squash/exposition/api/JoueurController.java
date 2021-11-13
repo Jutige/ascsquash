@@ -29,7 +29,7 @@ public class JoueurController {
     @PostMapping("/create")
     @ApiOperation(value = "crée un joueur")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Créatione effectuée"),
+            @ApiResponse(code = 201, message = "Création effectuée"),
             @ApiResponse(code = 400,message = "données en entrée incorrectes"),
             @ApiResponse(code = 409, message = "joueur existant")
     })

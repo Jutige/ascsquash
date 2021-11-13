@@ -65,4 +65,18 @@ public class UserRepositoryImpl implements IUserDomaine {
             return true;
         }
     }
+
+    @Override
+    public User findByIdUser(String idUser) {
+        UserEntity userEntity = userRepository.findByIdMail(idUser);
+        return new User(userEntity.getJoueurEntity().getNomJoueur(),
+                userEntity.getJoueurEntity().getPrenomJoueur(),
+                userEntity.getJoueurEntity().getMailJoueur(),
+                userEntity.getJoueurEntity().getNumeroTelJoueur(),
+                userEntity.getIdMail(),
+                "",
+                userEntity.isAutorized(),
+                userEntity.getLastDateConnexion(),
+                userEntity.getRoles());
+    }
 }

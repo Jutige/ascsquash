@@ -5,7 +5,9 @@ import com.asc.squash.infrastructure.AbstractMapper;
 import com.asc.squash.infrastructure.Joueur.IJoueurRepository;
 import com.asc.squash.infrastructure.Joueur.JoueurEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserEntityMapper extends AbstractMapper<User,UserEntity> {
 
     @Autowired

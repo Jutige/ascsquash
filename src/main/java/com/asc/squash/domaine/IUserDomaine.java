@@ -9,4 +9,6 @@ public interface IUserDomaine {
     List<User> findAllUsers();
 
     boolean deleteUser(String mail);
+
+    User findByIdUser(String idUser);
 }
