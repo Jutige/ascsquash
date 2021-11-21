@@ -11,4 +11,8 @@ public interface IUserDomaine {
     boolean deleteUser(String mail);
 
     User findByIdUser(String idUser);
+
+    String createWithJoueur(User mapToUser);
+
+    void updateDateConnexion(String username);
 }

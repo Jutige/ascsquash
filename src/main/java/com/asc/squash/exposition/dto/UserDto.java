@@ -13,8 +13,8 @@ public class UserDto extends JoueurDto {
     public UserDto() {
     }
 
-    public UserDto(String nomJoueur, String prenomJoueur, String mailJoueur, String numeroTelJoueur, Set<RoleTypeEnum> roles, Date lastDateConnexion) {
-        super(nomJoueur, prenomJoueur, mailJoueur, numeroTelJoueur);
+    public UserDto(String idAsc, String nomJoueur, String prenomJoueur, String mailJoueur, String numeroTelJoueur, Set<RoleTypeEnum> roles, Date lastDateConnexion) {
+        super(nomJoueur, prenomJoueur, mailJoueur, numeroTelJoueur, idAsc);
         this.roles = roles;
         LastDateConnexion = lastDateConnexion;
     }

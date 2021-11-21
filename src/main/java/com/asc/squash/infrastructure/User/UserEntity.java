@@ -17,11 +17,10 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUser;
 
-    private String idMail;
+    private String idAsc;
     private String password;
     private boolean isAutorized;
     @Temporal(TemporalType.TIMESTAMP)
-    @UpdateTimestamp
     private Date LastDateConnexion;
     @ElementCollection
     @Enumerated(EnumType.STRING)
@@ -34,8 +33,8 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(String idMail, String password, boolean isAutorized, Set<RoleTypeEnum> roles, JoueurEntity joueurEntity) {
-        this.idMail = idMail;
+    public UserEntity(String idAsc, String password, boolean isAutorized, Set<RoleTypeEnum> roles, JoueurEntity joueurEntity) {
+        this.idAsc = idAsc;
         this.password = password;
         this.isAutorized = isAutorized;
         this.roles = roles;
@@ -50,12 +49,12 @@ public class UserEntity {
         this.idUser = idUser;
     }
 
-    public String getIdMail() {
-        return idMail;
+    public String getIdAsc() {
+        return idAsc;
     }
 
     public void setIdUtilisateur(String idUtilisateur) {
-        this.idMail = idUtilisateur;
+        this.idAsc = idUtilisateur;
     }
 
     public String getPassword() {

@@ -10,7 +10,8 @@ import java.util.List;
 @Repository
 public interface IUserRepository extends JpaRepository<UserEntity, Long> {
 
-    UserEntity findByIdMail(String idUser);
+    UserEntity findByIdAsc(String idUser);
 
-    List<UserEntity> findByIdMailNotNull();
+    List<UserEntity> findByIdAscNotNull();
+
 }

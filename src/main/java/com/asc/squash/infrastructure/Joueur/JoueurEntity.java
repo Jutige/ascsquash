@@ -11,6 +11,7 @@ public class JoueurEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idJoueur;
+    private String idAsc;
     private String nomJoueur;
     private String prenomJoueur;
     private String mailJoueur;
@@ -19,11 +20,12 @@ public class JoueurEntity {
     public JoueurEntity() {
     }
 
-    public JoueurEntity(String nomJoueur, String prenomJoueur, String mailJoueur, String numeroTelJoueur) {
+    public JoueurEntity(String nomJoueur, String prenomJoueur, String mailJoueur, String numeroTelJoueur, String idAsc) {
         this.nomJoueur = nomJoueur;
         this.prenomJoueur = prenomJoueur;
         this.mailJoueur = mailJoueur;
         this.numeroTelJoueur = numeroTelJoueur;
+        this.idAsc = idAsc;
     }
 
     public String getNomJoueur() {
@@ -52,5 +54,17 @@ public class JoueurEntity {
 
     public void setNumeroTelJoueur(String numeroTelJoueur) {
         this.numeroTelJoueur = numeroTelJoueur;
+    }
+
+    public String getIdAsc() {
+        return idAsc;
+    }
+
+    public void setIdAsc(String idAsc) {
+        this.idAsc = idAsc;
+    }
+
+    public void setMailJoueur(String mailJoueur) {
+        this.mailJoueur = mailJoueur;
     }
 }

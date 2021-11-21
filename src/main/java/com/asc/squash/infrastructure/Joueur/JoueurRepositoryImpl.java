@@ -24,11 +24,15 @@ public class JoueurRepositoryImpl implements IJoueurDomaine {
     @Override
     public boolean create(Joueur joueur) {
 
-        JoueurEntity joueurEntity = joueurRepository.findByMailJoueur(joueur.getMailJoueur());
+        JoueurEntity joueurEntity = joueurRepository.findByIdAsc(joueur.getIdAsc());
         if (joueurEntity != null) {
             return false;
         }else {
-            JoueurEntity joueurEntitySave = new JoueurEntity(joueur.getNomJoueur(), joueur.getPrenomJoueur(), joueur.getMailJoueur(), joueur.getNumeroTelJoueur());
+            JoueurEntity joueurEntitySave = new JoueurEntity(joueur.getNomJoueur(),
+                    joueur.getPrenomJoueur(),
+                    joueur.getMailJoueur(),
+                    joueur.getNumeroTelJoueur(),
+                    joueur.getIdAsc());
             joueurRepository.save(joueurEntitySave);
             return true;
         }
@@ -37,7 +41,7 @@ public class JoueurRepositoryImpl implements IJoueurDomaine {
     @Override
     public List<Joueur> findAllJoueur() {
 
-        List<JoueurEntity> joueurEntityList = joueurRepository.findByMailJoueurNotNull();
+        List<JoueurEntity> joueurEntityList = joueurRepository.findByIdAscNotNull();
         List<Joueur> joueurList = new ArrayList<Joueur>();
         joueurList = joueurEntityMapper.mapToDomainList(joueurEntityList);
         return joueurList;
@@ -45,10 +49,11 @@ public class JoueurRepositoryImpl implements IJoueurDomaine {
 
     @Override
     public Joueur UpdateJoueur(Joueur joueur) {
-        JoueurEntity joueurEntity = joueurRepository.findByMailJoueur(joueur.getMailJoueur());
+        JoueurEntity joueurEntity = joueurRepository.findByIdAsc(joueur.getIdAsc());
         if (joueurEntity == null) {
             return null;
         }else {
+            joueurEntity.setMailJoueur(joueur.getMailJoueur());
             joueurEntity.setNomJoueur(joueur.getNomJoueur());
             joueurEntity.setPrenomJoueur(joueur.getPrenomJoueur());
             joueurEntity.setNumeroTelJoueur(joueur.getNumeroTelJoueur());
@@ -58,9 +63,9 @@ public class JoueurRepositoryImpl implements IJoueurDomaine {
     }
 
     @Override
-    public boolean deleteJoueur(String email) {
+    public boolean deleteJoueur(String idAsc) {
 
-        JoueurEntity joueurEntity = joueurRepository.findByMailJoueur(email);
+        JoueurEntity joueurEntity = joueurRepository.findByIdAsc(idAsc);
         if (joueurEntity != null ) {
             joueurRepository.delete(joueurEntity);
             return true;
@@ -71,6 +76,10 @@ public class JoueurRepositoryImpl implements IJoueurDomaine {
 
     @Override
     public Joueur findJoueurById (String idUSer) {
-        return joueurEntityMapper.mapToDomain(joueurRepository.findByMailJoueur(idUSer));
+        JoueurEntity joueurEntity = joueurRepository.findByIdAsc(idUSer);
+        if (joueurEntity != null) {
+            return joueurEntityMapper.mapToDomain(joueurRepository.findByIdAsc(idUSer));
+        }
+        return null;
     }
 }

@@ -16,18 +16,20 @@ public class JoueurEntityMapper extends AbstractMapper<Joueur,JoueurEntity> {
         return new Joueur(entity.getNomJoueur(),
                 entity.getPrenomJoueur(),
                 entity.getMailJoueur(),
-                entity.getNumeroTelJoueur());
+                entity.getNumeroTelJoueur(),
+                entity.getIdAsc());
     }
 
     @Override
     public JoueurEntity mapToEntity(Joueur domaine) {
 
-        JoueurEntity entity = joueurRepository.findByMailJoueur(domaine.getMailJoueur());
+        JoueurEntity entity = joueurRepository.findByIdAsc(domaine.getIdAsc());
         if (entity == null) {
             entity = new JoueurEntity(domaine.getNomJoueur(),
                     domaine.getPrenomJoueur(),
-                    entity.getMailJoueur(),
-                    entity.getNumeroTelJoueur()) ;
+                    domaine.getMailJoueur(),
+                    domaine.getNumeroTelJoueur(),
+                    domaine.getIdAsc()) ;
         }
         return entity;
     }

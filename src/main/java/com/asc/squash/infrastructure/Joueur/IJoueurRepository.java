@@ -8,6 +8,6 @@ import java.util.List;
 @Repository
 public interface IJoueurRepository extends JpaRepository<JoueurEntity, Long> {
 
-    JoueurEntity findByMailJoueur(String email);
-    List<JoueurEntity> findByMailJoueurNotNull();
+    JoueurEntity findByIdAsc(String idAsc);
+    List<JoueurEntity> findByIdAscNotNull();
 }

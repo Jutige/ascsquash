@@ -26,7 +26,8 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.asc.squash.exposition"))
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(apiInfo());
+                .apiInfo(apiInfo())
+                ;
     }
     
     ApiInfo apiInfo() {

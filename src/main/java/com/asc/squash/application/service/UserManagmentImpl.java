@@ -1,12 +1,17 @@
 package com.asc.squash.application.service;
 
+import com.asc.squash.application.UtilisateurDetailService;
 import com.asc.squash.application.mapper.UserDtoCreateMapper;
 import com.asc.squash.domaine.IJoueurDomaine;
+import com.asc.squash.domaine.IMailDomaine;
 import com.asc.squash.domaine.IUserDomaine;
 import com.asc.squash.domaine.User;
 import com.asc.squash.exposition.dto.UserDto;
 import com.asc.squash.exposition.dto.UserDtoCreate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,19 +28,44 @@ public class UserManagmentImpl implements IUserManagment{
     @Autowired
     IJoueurDomaine joueurDomaine;
 
-//    @Autowired
-//    UserDtoCreateMapper userDtoCreateMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    UserDtoCreateMapper userDtoCreateMapper;
+
+    @Autowired
+    private IMailDomaine mailSenderProfile;
+
+    private static Logger logger = LoggerFactory.getLogger(UserManagmentImpl.class);
 
     @Override
     public String createUser(UserDtoCreate userDto) {
         if (joueurDomaine.findJoueurById(userDto.getIdUSer()) == null ) {
-            return "joueur inexistant";
+            User user = userDtoCreateMapper.mapToUser(userDto);
+            user.setIdUser(userDto.getIdUSer());
+            user.setPassword(passwordEncoder.encode("0000"));
+            return userDomaine.createWithJoueur(user);
         }
+
         User user = new User(userDto.getIdUSer(),
-                "0000",
+                passwordEncoder.encode("0000"),
                 true,
                 userDto.getRoles());
-        return userDomaine.create(user);
+        try {
+            String subject = "création compte ASC Squash";
+            String message = "Bonjour," + "\n\n" + "Le mot de passe pour accéder à l'application est : " + "\n\n" +
+                    "0000" + "\n\n" +
+                    "Merci de le modifier à la première connexion";
+            mailSenderProfile.sendMail(subject,message,userDto.getMailJoueur());
+            logger.info("Mail envoyé");
+            return userDomaine.create(user);
+
+        }catch (Exception e) {
+            logger.error("Problème envoi de mail");
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -44,7 +74,8 @@ public class UserManagmentImpl implements IUserManagment{
         List<UserDto> userDtos = new ArrayList<UserDto>();
 
         for(User user : userDomaine.findAllUsers()) {
-            userDtos.add(new UserDto(user.getNomJoueur(),
+            userDtos.add(new UserDto(user.getIdAsc(),
+                    user.getNomJoueur(),
                     user.getPrenomJoueur(),
                     user.getMailJoueur(),
                     user.getNumeroTelJoueur(),
@@ -62,5 +93,23 @@ public class UserManagmentImpl implements IUserManagment{
         }else {
             return "suppression non effectuée";
         }
+    }
+
+    @Override
+    public UserDto findUserById(String idUser) {
+        logger.info("userId : " + idUser);
+        User user = userDomaine.findByIdUser(idUser);
+        return new UserDto(user.getIdAsc(),
+                user.getNomJoueur(),
+                user.getPrenomJoueur(),
+                user.getMailJoueur(),
+                user.getNumeroTelJoueur(),
+                user.getRole(),
+                user.getLastDateConnexion());
+    }
+
+    @Override
+    public void updateDateConnexion(String username) {
+        userDomaine.updateDateConnexion(username);
     }
 }

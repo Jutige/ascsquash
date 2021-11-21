@@ -2,6 +2,7 @@ package com.asc.squash.domaine;
 
 public class Joueur {
 
+    private String idAsc;
     private String nomJoueur;
     private String prenomJoueur;
     private String mailJoueur;
@@ -10,11 +11,20 @@ public class Joueur {
     public Joueur() {
     }
 
-    public Joueur(String nomJoueur, String prenomJoueur, String mailJoueur, String numeroTelJoueur) {
+    public Joueur(String nomJoueur, String prenomJoueur, String mailJoueur, String numeroTelJoueur, String idAsc) {
         this.nomJoueur = nomJoueur;
         this.prenomJoueur = prenomJoueur;
         this.mailJoueur = mailJoueur;
         this.numeroTelJoueur = numeroTelJoueur;
+        this.idAsc = idAsc;
+    }
+
+    public String getIdAsc() {
+        return idAsc;
+    }
+
+    public void setIdAsc(String idAsc) {
+        this.idAsc = idAsc;
     }
 
     public String getNomJoueur() {

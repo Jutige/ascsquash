@@ -18,11 +18,12 @@ public class UserEntityMapper extends AbstractMapper<User,UserEntity> {
 
     @Override
     public User mapToDomain(UserEntity entity) {
-        return new User(entity.getJoueurEntity().getNomJoueur(),
+        return new User(entity.getJoueurEntity().getIdAsc(),
+                entity.getJoueurEntity().getNomJoueur(),
                 entity.getJoueurEntity().getPrenomJoueur(),
                 entity.getJoueurEntity().getMailJoueur(),
                 entity.getJoueurEntity().getNumeroTelJoueur(),
-                entity.getIdMail(),
+                entity.getIdAsc(),
                 entity.getPassword(),
                 entity.isAutorized(),
                 entity.getLastDateConnexion(),
@@ -32,7 +33,7 @@ public class UserEntityMapper extends AbstractMapper<User,UserEntity> {
     @Override
     public UserEntity mapToEntity(User dto) {
 
-        JoueurEntity joueurEntity = joueurRepository.findByMailJoueur(dto.getMailJoueur());
+        JoueurEntity joueurEntity = joueurRepository.findByIdAsc(dto.getIdAsc());
         return new UserEntity(dto.getIdUser(),
                 dto.getPassword(),
                 dto.isAutorized(),

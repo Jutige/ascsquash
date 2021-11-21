@@ -26,7 +26,7 @@ public class InfoRepositoryImpl implements IInfoDomaine {
 
     @Override
     public Info createInfo(Info info) {
-        UserEntity userEntity = userRepository.findByIdMail(info.getUserCreate().getIdUser());
+        UserEntity userEntity = userRepository.findByIdAsc(info.getUserCreate().getIdUser());
         InfoEntity infoEntity = new InfoEntity(info.getTitle(),
                 info.getBody(),
                 new Date(),

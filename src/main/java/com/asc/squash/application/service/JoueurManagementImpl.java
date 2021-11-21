@@ -29,7 +29,7 @@ public class JoueurManagementImpl implements IJoueurManagment {
     public String createJoueur(JoueurDto joueurDto) {
 
         if (joueurDomaine.create(joueurDtoMapper.mapToJoueur(joueurDto))){
-            return joueurDto.getMailJoueur();
+            return joueurDto.getIdAsc();
         }
         else{return null;}
     }
@@ -49,9 +49,9 @@ public class JoueurManagementImpl implements IJoueurManagment {
     }
 
     @Override
-    public String deleteJoueur(String mail) {
+    public String deleteJoueur(String idAsc) {
 
-        if (joueurDomaine.deleteJoueur(mail)) {
+        if (joueurDomaine.deleteJoueur(idAsc)) {
             return "Suppression effectuée";
         }else {
             return "Suppression non effectuée";

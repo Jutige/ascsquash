@@ -12,4 +12,8 @@ public interface IUserManagment {
     List<UserDto> listUserDto();
 
     String deleteUser(String mail);
+
+    UserDto findUserById(String idUser);
+
+    void updateDateConnexion(String username);
 }

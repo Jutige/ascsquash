@@ -12,12 +12,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("v1/joueur")
+@Secured({"ROLE_USER","ROLE_RESP","ROLE_ADMIN"})
 @Api(value = "permet la création/mise à jour/suppression dans la base")
 public class JoueurController {
 
@@ -34,6 +36,7 @@ public class JoueurController {
             @ApiResponse(code = 409, message = "joueur existant")
     })
     public ResponseEntity<String> createJoueur(@RequestBody JoueurDto joueurDto) {
+        logger.info("joueurDto : "+joueurDto.toString());
         return new ResponseEntity<String>(joueurManagment.createJoueur(joueurDto), HttpStatus.CREATED);
     }
 
@@ -54,6 +57,7 @@ public class JoueurController {
             @ApiResponse(code = 404, message = "Aucun joueur trouvé")
     })
     public ResponseEntity<JoueurDto> updateJoueur(@RequestBody JoueurDto joueurDto) {
+        logger.info("joueurDto : "+joueurDto.toString());
         return new ResponseEntity<JoueurDto>(joueurManagment.updateJoueur(joueurDto), HttpStatus.OK);
     }
 
@@ -62,8 +66,8 @@ public class JoueurController {
             @ApiResponse(code = 200,message = "Ok, suppression effectuée"),
             @ApiResponse(code = 404,message = "joueur non supprimé : joueur absent ou problème lors de la suppression en base")
     })
-    @DeleteMapping("/delete/{mail}")
-    public ResponseEntity<String> deleteJoueur(@PathVariable("mail") String mail){
-        return new ResponseEntity<String>(joueurManagment.deleteJoueur(mail), HttpStatus.OK);
+    @DeleteMapping("/delete/{idAsc}")
+    public ResponseEntity<String> deleteJoueur(@PathVariable("idAsc") String idAsc){
+        return new ResponseEntity<String>(joueurManagment.deleteJoueur(idAsc), HttpStatus.OK);
     }
 }

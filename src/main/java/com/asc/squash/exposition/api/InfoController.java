@@ -13,12 +13,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("v1/info")
+@Secured({"ROLE_USER","ROLE_RESP","ROLE_ADMIN"})
 @Api(value = "permet la création/mise à jour/suppression dans la base")
 public class InfoController {
 

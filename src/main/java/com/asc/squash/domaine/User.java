@@ -14,8 +14,8 @@ public class User extends Joueur {
     public User() {
     }
 
-    public User(String nomJoueur, String prenomJoueur, String mailJoueur, String numeroTelJoueur, String idUser, String password, boolean isAutorized, Date lastDateConnexion, Set<RoleTypeEnum> role) {
-        super(nomJoueur, prenomJoueur, mailJoueur, numeroTelJoueur);
+    public User(String idAsc, String nomJoueur, String prenomJoueur, String mailJoueur, String numeroTelJoueur, String idUser, String password, boolean isAutorized, Date lastDateConnexion, Set<RoleTypeEnum> role) {
+        super(nomJoueur, prenomJoueur, mailJoueur, numeroTelJoueur, idAsc);
         this.idUser = idUser;
         this.password = password;
         this.isAutorized = isAutorized;
