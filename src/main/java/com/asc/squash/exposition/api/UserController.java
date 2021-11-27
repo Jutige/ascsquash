@@ -1,7 +1,6 @@
 package com.asc.squash.exposition.api;
 
 import com.asc.squash.application.service.IUserManagment;
-import com.asc.squash.exposition.dto.JoueurDto;
 import com.asc.squash.exposition.dto.UserDto;
 import com.asc.squash.exposition.dto.UserDtoCreate;
 import io.swagger.annotations.Api;
@@ -37,6 +36,12 @@ public class UserController {
             @ApiResponse(code = 409, message = "utilisateur existant")
     })
     public ResponseEntity<String> createUser(@RequestBody UserDtoCreate userDto) {
+        logger.info("idUser : " + userDto.getIdUSer());
+        logger.info("idASC : " + userDto.getIdAsc());
+        logger.info("roles : " + userDto.getRoles());
+        if (userDto.getIdUSer() == null && userDto.getIdAsc() !=null){
+            userDto.setIdUSer(userDto.getIdAsc());
+        }
         return new ResponseEntity<String>(userManagment.createUser(userDto), HttpStatus.CREATED);
     }
 
@@ -60,17 +65,17 @@ public class UserController {
     public ResponseEntity<List<UserDto>> listUser(){
         return new ResponseEntity<List<UserDto>>(userManagment.listUserDto(), HttpStatus.OK);
     }
-/*
+
     @PostMapping("/update")
-    @ApiOperation(value = "Mise à jour d'un joueur")
+    @ApiOperation(value = "Mise à jour d'un utilisateur")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Mise à jour effectuée"),
-            @ApiResponse(code = 404, message = "Aucun joueur trouvé")
+            @ApiResponse(code = 404, message = "Aucun utilisateur trouvé")
     })
-    public ResponseEntity<JoueurDto> updateJoueur(@RequestBody JoueurDto joueurDto) {
-        return new ResponseEntity<JoueurDto>(joueurManagment.updateJoueur(joueurDto), HttpStatus.OK);
+    public ResponseEntity<UserDtoCreate> updateJoueur(@RequestBody UserDtoCreate userDto) {
+        return new ResponseEntity<UserDtoCreate>(userManagment.updateUser(userDto), HttpStatus.OK);
     }
-*/
+
     @ApiOperation(value = "Supprime un utilisateur")
     @ApiResponses(value = {
             @ApiResponse(code = 200,message = "Ok, suppression effectuée"),

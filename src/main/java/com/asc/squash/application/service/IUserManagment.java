@@ -16,4 +16,6 @@ public interface IUserManagment {
     UserDto findUserById(String idUser);
 
     void updateDateConnexion(String username);
+
+    UserDtoCreate updateUser(UserDtoCreate userDto);
 }

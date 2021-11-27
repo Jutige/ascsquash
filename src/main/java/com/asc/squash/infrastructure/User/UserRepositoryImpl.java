@@ -36,6 +36,9 @@ public class UserRepositoryImpl implements IUserDomaine {
                 user.isAutorized(),
                 user.getRole(),
                 joueurEntity);
+        Date date = new Date();
+        userEntity.setLastDateConnexion(date);
+        logger.info(userEntity.toString());
         userRepository.save(userEntity);
 
         return "création effectuée";
@@ -56,7 +59,11 @@ public class UserRepositoryImpl implements IUserDomaine {
                 user.isAutorized(),
                 user.getRole(),
                 joueurEntity);
+        Date date = new Date();
+        userEntity.setLastDateConnexion(date);
+        logger.info(userEntity.toString());
         userRepository.save(userEntity);
+        logger.info(userRepository.findByIdAsc(userEntity.getIdAsc()).toString());
         return "création effectuée";
     }
 

@@ -67,4 +67,16 @@ public class JoueurEntity {
     public void setMailJoueur(String mailJoueur) {
         this.mailJoueur = mailJoueur;
     }
+
+    @Override
+    public String toString() {
+        return "JoueurEntity{" +
+                "idJoueur=" + idJoueur +
+                ", idAsc='" + idAsc + '\'' +
+                ", nomJoueur='" + nomJoueur + '\'' +
+                ", prenomJoueur='" + prenomJoueur + '\'' +
+                ", mailJoueur='" + mailJoueur + '\'' +
+                ", numeroTelJoueur='" + numeroTelJoueur + '\'' +
+                '}';
+    }
 }

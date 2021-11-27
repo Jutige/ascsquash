@@ -41,11 +41,25 @@ public class UserManagmentImpl implements IUserManagment{
 
     @Override
     public String createUser(UserDtoCreate userDto) {
+        String subject = "Privé";
+        String message = "Bonjour," + "\n\n" + "Le mot de passe pour accéder à l'application est : " + "\n\n" +
+                "0000" + "\n\n" +
+                "Merci de le modifier à la première connexion";
         if (joueurDomaine.findJoueurById(userDto.getIdUSer()) == null ) {
             User user = userDtoCreateMapper.mapToUser(userDto);
             user.setIdUser(userDto.getIdUSer());
             user.setPassword(passwordEncoder.encode("0000"));
-            return userDomaine.createWithJoueur(user);
+            user.setRole(userDto.getRoles());
+            try {
+                mailSenderProfile.sendMail(subject,message,userDto.getMailJoueur());
+                logger.info("Mail envoyé");
+                return userDomaine.createWithJoueur(user);
+
+            }catch (Exception e) {
+                logger.error("Problème envoi de mail");
+                e.printStackTrace();
+                return null;
+            }
         }
 
         User user = new User(userDto.getIdUSer(),
@@ -53,10 +67,6 @@ public class UserManagmentImpl implements IUserManagment{
                 true,
                 userDto.getRoles());
         try {
-            String subject = "création compte ASC Squash";
-            String message = "Bonjour," + "\n\n" + "Le mot de passe pour accéder à l'application est : " + "\n\n" +
-                    "0000" + "\n\n" +
-                    "Merci de le modifier à la première connexion";
             mailSenderProfile.sendMail(subject,message,userDto.getMailJoueur());
             logger.info("Mail envoyé");
             return userDomaine.create(user);
@@ -111,5 +121,10 @@ public class UserManagmentImpl implements IUserManagment{
     @Override
     public void updateDateConnexion(String username) {
         userDomaine.updateDateConnexion(username);
+    }
+
+    @Override
+    public UserDtoCreate updateUser(UserDtoCreate userDto) {
+        return null;
     }
 }

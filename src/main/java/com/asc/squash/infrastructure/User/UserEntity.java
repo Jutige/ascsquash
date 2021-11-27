@@ -96,4 +96,17 @@ public class UserEntity {
     public void setJoueurEntity(JoueurEntity joueurEntity) {
         this.joueurEntity = joueurEntity;
     }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "idUser=" + idUser +
+                ", idAsc='" + idAsc + '\'' +
+                ", password='" + password + '\'' +
+                ", isAutorized=" + isAutorized +
+                ", LastDateConnexion=" + LastDateConnexion +
+                ", roles=" + roles +
+                ", joueurEntity=" + joueurEntity.toString() +
+                '}';
+    }
 }

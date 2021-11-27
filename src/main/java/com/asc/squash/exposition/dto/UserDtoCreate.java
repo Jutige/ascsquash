@@ -38,4 +38,12 @@ public class UserDtoCreate extends JoueurDto{
     public void setRoles(Set<RoleTypeEnum> roles) {
         this.roles = roles;
     }
+
+    @Override
+    public String toString() {
+        return "UserDtoCreate{" +
+                "idUser='" + idUser + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }
