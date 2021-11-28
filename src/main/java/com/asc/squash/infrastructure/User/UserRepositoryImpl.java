@@ -77,6 +77,18 @@ public class UserRepositoryImpl implements IUserDomaine {
      }
 
     @Override
+    public User updateUser(User user) {
+        UserEntity userEntity = userRepository.findByIdAsc(user.getIdAsc());
+        userEntity.getJoueurEntity().setNomJoueur(user.getNomJoueur());
+        userEntity.getJoueurEntity().setPrenomJoueur(user.getPrenomJoueur());
+        userEntity.getJoueurEntity().setMailJoueur(user.getMailJoueur());
+        userEntity.getJoueurEntity().setNumeroTelJoueur(user.getNumeroTelJoueur());
+        userEntity.setRoles(user.getRole());
+        userRepository.save(userEntity);
+        return user;
+    }
+
+    @Override
     public List<User> findAllUsers() {
 
         List<User> users = new ArrayList<User>();

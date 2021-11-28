@@ -15,4 +15,6 @@ public interface IUserDomaine {
     String createWithJoueur(User mapToUser);
 
     void updateDateConnexion(String username);
+
+    User updateUser(User user);
 }

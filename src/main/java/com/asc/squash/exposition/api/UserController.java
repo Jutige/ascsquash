@@ -73,6 +73,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "Aucun utilisateur trouvé")
     })
     public ResponseEntity<UserDtoCreate> updateJoueur(@RequestBody UserDtoCreate userDto) {
+
         return new ResponseEntity<UserDtoCreate>(userManagment.updateUser(userDto), HttpStatus.OK);
     }
 

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -125,6 +126,24 @@ public class UserManagmentImpl implements IUserManagment{
 
     @Override
     public UserDtoCreate updateUser(UserDtoCreate userDto) {
-        return null;
+
+        if (userDomaine.findByIdUser(userDto.getIdAsc()) == null) {
+            logger.error("Pas de user pour id " + userDto.getIdAsc());
+            return null;
+        }
+        User user = new User(userDto.getIdAsc(),
+                userDto.getNomJoueur(),
+                userDto.getPrenomJoueur(),
+                userDto.getMailJoueur(),
+                userDto.getNumeroTelJoueur(),
+                userDto.getIdAsc(),
+                "",
+                true,
+                new Date(),
+                userDto.getRoles()
+                );
+        logger.info("updateUser : " + user.toString());
+        User userUpdated = userDomaine.updateUser(user);
+        return userDto;
     }
 }

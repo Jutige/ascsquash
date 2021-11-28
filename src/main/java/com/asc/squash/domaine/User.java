@@ -69,4 +69,15 @@ public class User extends Joueur {
     public void setRole(Set<RoleTypeEnum> role) {
         this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "idUser='" + idUser + '\'' +
+                ", password='" + password + '\'' +
+                ", isAutorized=" + isAutorized +
+                ", LastDateConnexion=" + LastDateConnexion +
+                ", role=" + role +
+                '}';
+    }
 }
