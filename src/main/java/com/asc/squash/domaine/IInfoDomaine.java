@@ -10,4 +10,6 @@ public interface IInfoDomaine {
     boolean deleteInfo(Long idInfo);
 
     boolean updateInfo(Info info);
+
+    Info getInfoById(Long idInfo);
 }

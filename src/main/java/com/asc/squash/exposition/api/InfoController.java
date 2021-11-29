@@ -54,6 +54,16 @@ public class InfoController {
         return new ResponseEntity<List<InfoDtoResult>>(infoManagment.listInfo(), HttpStatus.OK);
     }
 
+    @GetMapping("/get/{idInfo}")
+    @ApiOperation(value = "récupère la liste des messages d'informations")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "message d'information retournée"),
+            @ApiResponse(code = 404, message = "aucun message trouvé")
+    })
+    public ResponseEntity<InfoDtoResult> getMessageById(@PathVariable("idInfo") Long idInfo){
+        return new ResponseEntity<InfoDtoResult>(infoManagment.getInfoById(idInfo), HttpStatus.OK);
+    }
+
     @PostMapping("/update")
     @ApiOperation(value = "Mise à jour d'un message d'information")
     @ApiResponses(value = {
@@ -81,5 +91,4 @@ public class InfoController {
         }
         return new ResponseEntity<String>("Suppression non effectuée", HttpStatus.NOT_FOUND);
     }
-
 }

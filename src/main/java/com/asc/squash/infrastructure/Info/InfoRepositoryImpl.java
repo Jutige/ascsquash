@@ -77,4 +77,20 @@ public class InfoRepositoryImpl implements IInfoDomaine {
         }
         return false;
     }
+
+    @Override
+    public Info getInfoById(Long idInfo) {
+        InfoEntity infoEntity = infoRepository.findByIdInfo(idInfo);
+        if (infoEntity == null){
+            return null;
+        }else{
+            Info info = new Info(infoEntity.getTitle(),
+                    infoEntity.getBody(),
+                    infoEntity.getCreationDate(),
+                    infoEntity.getUpdateDate(),
+                    userEntityMapper.mapToDomain(infoEntity.getUserCreate()),
+                    infoEntity.getIdInfo());
+            return info;
+        }
+    }
 }

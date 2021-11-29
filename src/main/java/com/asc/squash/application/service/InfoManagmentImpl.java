@@ -60,4 +60,15 @@ public class InfoManagmentImpl implements IInfoManagment{
         info.setIdInfo(infoDtoResult.getIdInfo());
         return infoDomaine.updateInfo(info);
     }
+
+    @Override
+    public InfoDtoResult getInfoById(Long idInfo) {
+        Info info = infoDomaine.getInfoById(idInfo);
+        if (idInfo == null){
+            return null;
+        }else {
+            InfoDtoResult infoDtoResult = new InfoDtoResult(idInfo, infoDtoMapper.mapToEntity(info));
+            return infoDtoResult;
+        }
+    }
 }

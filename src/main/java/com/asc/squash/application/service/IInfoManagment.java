@@ -13,4 +13,6 @@ public interface IInfoManagment {
     boolean deleteInfo(Long idInfo);
 
     boolean updateInfo(InfoDtoResult infoDtoResult);
+
+    InfoDtoResult getInfoById(Long idInfo);
 }
