@@ -1,10 +1,11 @@
 package com.asc.squash.application.service;
 
 import com.asc.squash.application.mapper.InfoDtoMapper;
-import com.asc.squash.domaine.IInfoDomaine;
-import com.asc.squash.domaine.Info;
+import com.asc.squash.domaine.*;
 import com.asc.squash.exposition.dto.InfoDto;
 import com.asc.squash.exposition.dto.InfoDtoResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,14 @@ public class InfoManagmentImpl implements IInfoManagment{
     @Autowired
     InfoDtoMapper infoDtoMapper;
 
+    @Autowired
+    IUserDomaine userDomaine;
+
+    @Autowired
+    private IMailDomaine mailSenderProfile;
+
+    private static Logger logger = LoggerFactory.getLogger(InfoManagmentImpl.class);
+
     @Override
     public InfoDtoResult createInfo(InfoDto infoDto) {
 
@@ -30,11 +39,32 @@ public class InfoManagmentImpl implements IInfoManagment{
             InfoDto infoDto1 = infoDtoMapper.mapToEntity(info);
 
             //Envoi du mail à développer
+            if (infoDto.isNotification()){
+                notifierUtilisateurs(infoDto);
+            }
 
             InfoDtoResult infoDtoResult = new InfoDtoResult (info.getIdInfo(), infoDto1);
             return infoDtoResult;
         }
         return null;
+    }
+
+    private void notifierUtilisateurs(InfoDto infoDto) {
+
+        String listMails = "";
+        for (User user: userDomaine.findAllUsers()){
+            if (user.getMailJoueur() !=null && user.getMailJoueur() !=""){
+                listMails += user.getMailJoueur() + ";";
+            }
+        }
+        try {
+            mailSenderProfile.sendMail(infoDto.getTitle(),infoDto.getBody(),listMails);
+            logger.info("Mail envoyé");
+
+        }catch (Exception e) {
+            logger.error("Problème envoi de mail");
+            e.printStackTrace();
+        }
     }
 
     @Override
